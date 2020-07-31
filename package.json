@@ -1,0 +1,31 @@
+{
+  "name": "nexjs-ws.server.minimal-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc-watch --onSuccess \"node dist/main.js\""
+  },
+  "author": "juan coll",
+  "license": "ISC",
+  "dependencies": {
+    "@nexjs/wsserver": "^1.0.2",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.7",
+    "@types/jsonwebtoken": "^8.5.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "socket.io": "^2.3.0",
+    "strongly-typed-events": "^1.6.13",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/socket.io": "^2.1.8",
+    "tsc-watch": "^4.2.9"
+  }
+}
