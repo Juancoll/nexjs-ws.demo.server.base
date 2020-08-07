@@ -1,10 +1,10 @@
 import { IName, Rest, Hub, HubEventCredentialsData, HubEventCredentials } from '@nexjs/wsserver'
 import { AnyData } from '../models'
 
-export class CredentialContract implements IName {
+export class CredentialsContract implements IName {
 
     // IName interface implementation
-    public readonly name = 'credentialContract';
+    public readonly name = 'credentialsContract';
 
     @Hub({
         validation: async (instance, user, credential) => {
