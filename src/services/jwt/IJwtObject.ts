@@ -3,6 +3,6 @@ export interface IJwtObject<T> {
         alg: string;
         typ: string;
     };
-    payload: T & { iat: number, exp: number };
+    payload: T & { iat: number; exp: number };
     signature: string;
 }

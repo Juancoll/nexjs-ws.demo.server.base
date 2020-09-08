@@ -1,3 +1,3 @@
-import { Db } from "./Db";
+import { Db } from './Db'
 
-export const db = new Db();
+export const db = new Db()

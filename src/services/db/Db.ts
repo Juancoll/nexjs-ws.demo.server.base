@@ -1,23 +1,23 @@
-import { User } from "../../models";
+import { User } from '../../models'
 
 export class Db {
     users: { [key: string]: User } = {}
 
-    exists(email: string): boolean {
-        return this.users[email] ? true : false;
+    exists ( email: string ): boolean {
+        return this.users[email] ? true : false
     }
-    create(email: string, encryptedPassword: string): User {
+    create ( email: string, encryptedPassword: string ): User {
         const user = {
             email: email,
             roles: [],
             password: encryptedPassword,
-        } as User;
+        } as User
 
-        this.users[email] = user;
-        return user;
+        this.users[email] = user
+        return user
     }
 
-    get(email: string) {
-        return this.users[email];
+    get ( email: string ): User {
+        return this.users[email]
     }
 }

@@ -1,3 +1,3 @@
-import { Crypt } from './Crypt';
+import { Crypt } from './Crypt'
 
-export const crypt = new Crypt(10);
+export const crypt = new Crypt( 10 )
