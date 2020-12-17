@@ -1,41 +1,36 @@
-import { IName, Rest, Hub, HubEventCredentialsData, HubEventCredentials } from '@nexjs/wsserver'
+import { Rest, Hub, HubEventSelectorData, HubEventSelector } from '@nexjs/wsserver'
 import { AnyData } from '../models'
 
-export class CredentialsContract implements IName {
+export class CredentialsContract{
 
     // IName interface implementation
-    public readonly name = 'credentialsContract';
+    public readonly service = 'credentialContract';
 
     @Hub( {
-        validation: async ( instance, user, credential ) => {
+        validate: async ( instance, user, credential ) => {
             console.log( '[CredentialContract] [validation] onUpdate', credential )
             return true
         },
-        selection: async ( instance, user, userCredentials, serverCredentials ) => {
+        select: async ( instance, user, userCredentials, serverCredentials ) => {
             console.log( '[CredentialContract] [selection] onUpdate', userCredentials, serverCredentials )
             return true
         },
     } )
-    onUpdate = new HubEventCredentials<string>();
+    onUpdate = new HubEventSelector<string, string>();
 
     @Hub( {
-        validation: async ( instance, user, credential ) => {
+        validate: async ( instance, user, credential ) => {
             console.log( '[CredentialContract] [validation] onDataUpdate', credential )
             return true
         },
-        selection: async ( instance, user, userCredentials, serverCredentials ) => {
+        select: async ( instance, user, userCredentials, serverCredentials ) => {
             console.log( '[CredentialContract] [selection] onDataUpdate', userCredentials, serverCredentials )
             return true
         },
     } )
-    onDataUpdate = new HubEventCredentialsData<string, AnyData>();
+    onDataUpdate = new HubEventSelectorData<string, string, AnyData>();
 
-    @Rest( {
-        validation: async ( instance, user, credentials ) => {
-            console.log( '[CredentialContract] [validation] print()', credentials )
-            return true
-        },
-    } )
+    @Rest( )
     print (): void {
         console.log( '[CredentialContract] print()' )
     }
@@ -44,6 +39,6 @@ export class CredentialsContract implements IName {
     notify (): void {
         console.log( '[CredentialContract] notify()' )
         this.onUpdate.emit( 'serverCredentials-001' )
-        // this.onDataUpdate.emit("serverCredentials-002", { a: "hello", b: true } as AnyData);
+        this.onDataUpdate.emit( 'serverCredentials-002', { a: 'hello', b: true } as AnyData )
     }
 }

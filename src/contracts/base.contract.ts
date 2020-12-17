@@ -1,10 +1,10 @@
-import { IName, Rest, HubEvent, HubEventData, Hub, Data } from '@nexjs/wsserver'
+import { Rest, HubEvent, HubEventData, Hub, Data } from '@nexjs/wsserver'
 import { AnyData } from '../models'
 
-export class BaseContract implements IName {
+export class BaseContract {
 
     // IName interface implementation
-    public readonly name = 'baseContract';
+    public readonly service = 'baseContract';
 
     @Hub()
     onUpdate = new HubEvent();
