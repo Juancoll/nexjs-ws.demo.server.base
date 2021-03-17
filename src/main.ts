@@ -6,7 +6,7 @@ import * as cors from 'cors'
 import { WSServer, SocketIOServer } from '@nexjs/wsserver'
 
 import { BaseContract } from './contracts/base.contract'
-import { CredentialsContract } from './contracts/CredentialsContract'
+import { CredentialContract } from './contracts/credential.contract'
 import { User, Token } from './models'
 import { AuthStrategy } from './auth/auth.strategy'
 import { AuthContract } from './contracts/auth.contract'
@@ -15,7 +15,9 @@ import * as tools from './tools'
 const app = Express()
 app.use( Express.static( path.resolve( __dirname + '/../public' ) ) )
 const http = Http.createServer( app )
-const ioServer = io( http, { path: '/wsapi' } )
+const ioServer = new io.Server( http, {
+    path: '/wsapi',
+    cors: { origin: '*' } } )
 
 app.use( cors( {
     origin: true,
@@ -30,7 +32,7 @@ authStrategy.onRemove.sub( () => console.log( '[authStrategy] onRemove' ) )
 const wss = new WSServer<User, Token>( new AuthStrategy() )
 
 wss.register( new BaseContract() )
-wss.register( new CredentialsContract() )
+wss.register( new CredentialContract() )
 wss.register( new AuthContract() )
 wss.init( new SocketIOServer( ioServer ) )
 

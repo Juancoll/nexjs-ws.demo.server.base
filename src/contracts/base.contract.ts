@@ -1,9 +1,7 @@
-import { Rest, HubEvent, HubEventData, Hub, Data } from '@nexjs/wsserver'
+import { Rest, HubEvent, HubEventData, Hub, Data } from '../wslib'
 import { AnyData } from '../models'
 
 export class BaseContract {
-
-    // IName interface implementation
     public readonly service = 'baseContract';
 
     @Hub()
@@ -13,14 +11,14 @@ export class BaseContract {
     onDataUpdate = new HubEventData<AnyData>();
 
     @Rest()
-    print (): void {
+    print (): void{
         console.log( '[BaseContract] print()' )
     }
 
     @Rest()
     delay ( @Data() value: number ): Promise<number> {
         console.log( `[BaseContract] delay(${value})` )
-        return new Promise<number>( ( resolve ) => {
+        return new Promise<number>( ( resolve, reject ) => {
             setTimeout( () => {
                 resolve( value )
                 console.log( '[BaseContract] delay(...) : send response' )
@@ -29,7 +27,7 @@ export class BaseContract {
     }
 
     @Rest()
-    notify (): void{
+    notify (): void {
         console.log( '[BaseContract] notify()' )
         this.onUpdate.emit()
         this.onDataUpdate.emit( { a: 'hello', b: true } as AnyData )
